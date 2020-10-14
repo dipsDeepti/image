@@ -1,6 +1,7 @@
 
 .login-button {
     float: right;
+    margin-bottom: 30px;
 }
 .red {
     color: red;
@@ -9,11 +10,21 @@
 .loginForm{
     display: flex;
     align-items: center;
-    justify-content: center;  
+    justify-content: center; 
+    border: 3px solid black;
+    margin: 5px auto;
+    width: 30%;
+}
+.dispNone {
+    display: none;
 }
 
-H2{
+.dispBlock {
+    display: block;
+}
+/*{
     display: flex;
     align-items: center;
-    justify-content: center; 
-}
+    justify-content: center;
+    float: left; 
+}*/

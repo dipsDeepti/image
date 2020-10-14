@@ -9,35 +9,52 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-//import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 class Login extends Component {   
-    
+    constructor() {
+        super();
+        this.state = {
+            modalIsOpen: false,
+            usernameRequired: "dispNone",
+            username: "",
+            loginPasswordRequired: "dispNone",
+            loginPassword: "",
+            invalid:"dispNone",
+            loggedIn: sessionStorage.getItem("access-token") == null ? false : true
+        }
+    }
+
+    closeModalHandler = () => {
+        this.setState({ modalIsOpen: false });
+    }
+
     loginClickHandler = () => {
+        let mockUserName = "deepti";
+        let mockPassword = "deepti";
+        let accessToken ="xyz";
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 
-        let dataLogin = null;
-        let xhrLogin = new XMLHttpRequest();
-        let that = this;
-        xhrLogin.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                sessionStorage.setItem("uuid", JSON.parse(this.responseText).id);
-                sessionStorage.setItem("access-token", xhrLogin.getResponseHeader("access-token"));
+        if(this.state.username === mockUserName && this.state.loginPassword === mockPassword)
+        {
+            this.setState({
+                loggedIn: true
+            });
+            sessionStorage.setItem("access-token", accessToken);
+            this.props.history.push("/Home");
+            this.closeModalHandler();
+        }
+        else{
+            this.setState({invalid:"dispBlock"});
+        }
+    }
 
-                that.setState({
-                    loggedIn: true
-                });
-
-                that.closeModalHandler();
-            }
+    logoutHandler = (e) => {
+        sessionStorage.removeItem("access-token");
+        this.setState({
+            loggedIn: false
         });
-
-       // xhrLogin.open("POST", this.props.baseUrl + "auth/login");
-        //xhrLogin.setRequestHeader("Authorization", "Basic " + window.btoa(this.state.username + ":" + this.state.loginPassword));
-        //xhrLogin.setRequestHeader("Content-Type", "application/json");
-        //xhrLogin.setRequestHeader("Cache-Control", "no-cache");
-        //xhrLogin.send(dataLogin);
     }
 
     inputUsernameChangeHandler = (e) => {
@@ -48,15 +65,19 @@ class Login extends Component {
         this.setState({ loginPassword: e.target.value });
     }
     render(){
+        
         return(
             <div>
                <Header heading ="Image Viewer"/>
-               <h2>LOGIN</h2>
-               <Card className ="loginForm" variant="outlined">
+              
+               <Card className="loginForm" variant="outlined">
                    <CardContent>
+                   <Typography variant="headline" component="h2">
+                  LOGIN
+                </Typography>
                    <FormControl required>
                                 <InputLabel htmlFor="username">Username</InputLabel>
-                                <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler} />
+                                <Input id="username" type="text" onChange={this.inputUsernameChangeHandler} />
                                 <FormHelperText className={this.state.usernameRequired}>
                                     <span className="red">required</span>
                                 </FormHelperText>
@@ -64,14 +85,17 @@ class Login extends Component {
                             <br /><br />
                             <FormControl required>
                                 <InputLabel htmlFor="loginPassword">Password</InputLabel>
-                                <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
+                                <Input id="loginPassword" type="password" onChange={this.inputLoginPasswordChangeHandler} />
                                 <FormHelperText className={this.state.loginPasswordRequired}>
                                     <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
                             <FormControl>
-                            <Button size="small" variant="contained" color="primary" onClick ="{this.loginClickHandler}">Login</Button>
+                            <Button size="small" variant="contained" color="primary" onClick ={this.loginClickHandler}>Login</Button>
+                            <FormHelperText className={this.state.invalid}>
+                                <span className="red">Incorrect username and/or password </span>
+                            </FormHelperText>
                             </FormControl>
                    </CardContent>
                    <CardActions>
