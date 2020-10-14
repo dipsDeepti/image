@@ -1,0 +1,19 @@
+
+.login-button {
+    float: right;
+}
+.red {
+    color: red;
+}
+
+.loginForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
+
+H2{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
