@@ -32,7 +32,7 @@ class Login extends Component {
     loginClickHandler = () => {
         let mockUserName = "deepti";
         let mockPassword = "deepti";
-        let accessToken ="xyz";
+        let accessToken ="IGQVJXYlF6OEFwYmFlOVgwaHE2cDVPdjUxZAHVBNElXcEdDZADRIX0NQM2ZAmSzE5S3AtWVpqMmVfMjhTQUZAZAbjUydnp4Qy1td21kY05ERXc4ZATUxLUZA6ZAE1sVmNUbFRyRUNUUFVoMmtEZA1dpX0g3X2tCcQZDZD";
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 
@@ -42,7 +42,7 @@ class Login extends Component {
                 loggedIn: true
             });
             sessionStorage.setItem("access-token", accessToken);
-            this.props.history.push("/Home");
+            this.props.history.push("/home");
             this.closeModalHandler();
         }
         else{
@@ -68,11 +68,11 @@ class Login extends Component {
         
         return(
             <div>
-               <Header heading ="Image Viewer"/>
+               <Header heading ="Image Viewer" searchIcon = {false}/>
               
                <Card className="loginForm" variant="outlined">
                    <CardContent>
-                   <Typography variant="headline" component="h2">
+                   <Typography component="h2">
                   LOGIN
                 </Typography>
                    <FormControl required>
