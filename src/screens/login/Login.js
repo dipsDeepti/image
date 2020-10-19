@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import "./Login.css";
 import Header from '../../common/header/header';
 import Card from '@material-ui/core/Card';
@@ -11,7 +11,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-class Login extends Component {   
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -20,7 +20,7 @@ class Login extends Component {
             username: "",
             loginPasswordRequired: "dispNone",
             loginPassword: "",
-            invalid:"dispNone",
+            invalid: "dispNone",
             loggedIn: sessionStorage.getItem("access-token") == null ? false : true
         }
     }
@@ -32,12 +32,11 @@ class Login extends Component {
     loginClickHandler = () => {
         let mockUserName = "deepti";
         let mockPassword = "deepti";
-        let accessToken ="IGQVJXYlF6OEFwYmFlOVgwaHE2cDVPdjUxZAHVBNElXcEdDZADRIX0NQM2ZAmSzE5S3AtWVpqMmVfMjhTQUZAZAbjUydnp4Qy1td21kY05ERXc4ZATUxLUZA6ZAE1sVmNUbFRyRUNUUFVoMmtEZA1dpX0g3X2tCcQZDZD";
+        let accessToken = "IGQVJVM3VhN0pwcXJkQnRzSGhpdDI0bG1hNXhsWDcxcGg2TV9rNVFOeG5GSkhxWFRKOFdmTUpqM2pQQW53MEdMZAGlDcEVHMTJwcVh3ZAmFGXzZAjanNVLUFwR2x3b3ZApSURCYk1UdVFaWDExTmVLaW9SegZDZD";
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 
-        if(this.state.username === mockUserName && this.state.loginPassword === mockPassword)
-        {
+        if (this.state.username === mockUserName && this.state.loginPassword === mockPassword) {
             this.setState({
                 loggedIn: true
             });
@@ -45,8 +44,8 @@ class Login extends Component {
             this.props.history.push("/home");
             this.closeModalHandler();
         }
-        else{
-            this.setState({invalid:"dispBlock"});
+        else {
+            this.setState({ invalid: "dispBlock" });
         }
     }
 
@@ -64,46 +63,46 @@ class Login extends Component {
     inputLoginPasswordChangeHandler = (e) => {
         this.setState({ loginPassword: e.target.value });
     }
-    render(){
-        
-        return(
+    render() {
+
+        return (
             <div>
-               <Header heading ="Image Viewer" searchIcon = {false}/>
-              
-               <Card className="loginForm" variant="outlined">
-                   <CardContent>
-                   <Typography component="h2">
-                  LOGIN
+                <Header heading="Image Viewer" searchIcon={false} />
+
+                <Card className="loginForm" variant="outlined">
+                    <CardContent>
+                        <Typography component="h2">
+                            LOGIN
                 </Typography>
-                   <FormControl required>
-                                <InputLabel htmlFor="username">Username</InputLabel>
-                                <Input id="username" type="text" onChange={this.inputUsernameChangeHandler} />
-                                <FormHelperText className={this.state.usernameRequired}>
-                                    <span className="red">required</span>
-                                </FormHelperText>
-                            </FormControl>
-                            <br /><br />
-                            <FormControl required>
-                                <InputLabel htmlFor="loginPassword">Password</InputLabel>
-                                <Input id="loginPassword" type="password" onChange={this.inputLoginPasswordChangeHandler} />
-                                <FormHelperText className={this.state.loginPasswordRequired}>
-                                    <span className="red">required</span>
-                                </FormHelperText>
-                            </FormControl>
-                            <br /><br />
-                            <FormControl>
-                            <Button size="small" variant="contained" color="primary" onClick ={this.loginClickHandler}>Login</Button>
+                        <FormControl required>
+                            <InputLabel htmlFor="username">Username</InputLabel>
+                            <Input id="username" type="text" onChange={this.inputUsernameChangeHandler} />
+                            <FormHelperText className={this.state.usernameRequired}>
+                                <span className="red">required</span>
+                            </FormHelperText>
+                        </FormControl>
+                        <br /><br />
+                        <FormControl required>
+                            <InputLabel htmlFor="loginPassword">Password</InputLabel>
+                            <Input id="loginPassword" type="password" onChange={this.inputLoginPasswordChangeHandler} />
+                            <FormHelperText className={this.state.loginPasswordRequired}>
+                                <span className="red">required</span>
+                            </FormHelperText>
+                        </FormControl>
+                        <br /><br />
+                        <FormControl>
+                            <Button size="small" variant="contained" color="primary" onClick={this.loginClickHandler}>Login</Button>
                             <FormHelperText className={this.state.invalid}>
                                 <span className="red">Incorrect username and/or password </span>
                             </FormHelperText>
-                            </FormControl>
-                   </CardContent>
-                   <CardActions>
-                    
-                 </CardActions>
-               </Card>
+                        </FormControl>
+                    </CardContent>
+                    <CardActions>
+
+                    </CardActions>
+                </Card>
             </div>
-            
+
         )
     }
 }
