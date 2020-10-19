@@ -8,3 +8,24 @@
     align-items: center;
 }
 
+.searchBox{
+    background-color: #c0c0c0;
+    border-radius: 4px;
+    width: 300px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+}
+
+.profileLogo{
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    border: transparent;
+    cursor: pointer;
+    background-image: url("../../assets/upGradLogo.png");
+}
+
+#loggedInUserSection{
+    display: contents;
+}
